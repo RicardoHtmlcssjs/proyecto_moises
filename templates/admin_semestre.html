@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block body %}
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <img src="{{ url_for('static', filename='img/logo_iuta.jpg') }}" height="45px">
+                <span class="text-primary">IUTA</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        {% if opc_nav == 1 %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">            
+            <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">Administrador</a>
+                <ul class="dropdown-menu">
+                    <li><a href="admin_profesores" class="dropdown-item">Profesores</a></li>
+                    <li><a href="admin_alumnos" class="dropdown-item">Alumnos</a></li>
+                    <li><a href="admin_carreras" class="dropdown-item">Carreras</a></li>
+                    <li><a href="admin_semestre" class="dropdown-item active">Semestres</a></li>
+                    <li><a href="admin_materias" class="dropdown-item">Materias</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a href="/logout"><button type="button" class="btn btn-primary">Cerra sesion</button></a>
+        {% endif %}
+        </nav>
+    </div>
+    <!-- Navbar End -->
+    <div class="container my-5">
+        <h1 class="text-center">Semestres</h1>
+        <a href="{{url_for('crear_semestre')}}" class="btn btn-primary my-1">Agregar un semestre</a>
+        {% if error == 1 %}     
+            <div class="alert alert-{{ color }} text-center my-1">
+                <strong>{{ text }}</strong>
+            </div>
+        {% endif %}
+	    <table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">Id</th>
+		      <th scope="col">Descripcion</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for res in res_semestre %}
+		    <tr>
+		      <!-- <th scope="row">1</th> -->
+		      <td>{{ res[0] }}</td>
+		      <td>Semestre {{ res[1] }}</td>
+		    </tr>
+		  </tbody>
+		  {% endfor %}
+	</table>
+	</div>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, .2);;">
+            <p class="m-0 text-center text-white">
+                &copy; <a class="text-primary font-weight-bold" href="#">IUTA </a>. All Rights Reserved. Designed
+                by
+                <a class="text-primary font-weight-bold" href="https://htmlcodex.com">Moises Yanez</a>
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+   
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='owlcarousel/owl.carousel.min.js') }}"></script>{% endblock %}
